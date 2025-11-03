@@ -1,0 +1,74 @@
+﻿<style type="text/css">
+/* ANILLOS NEON */
+*, *::before, *::after {
+    padding: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  place-items: center;
+  perspective: 600px;
+  overflow: scroll;
+  background-image: radial-gradient(circle, #123, #000 30em);
+
+  *:not(:empty) {
+    transform-style: preserve-3d;
+  }
+}
+
+.scene {
+  position: relative;
+}
+
+.ball {
+  position: absolute;
+  inset: -8em;
+  background-image: url("https://img.webme.com/pic/s/sillvers/nikonnaranja4.png");
+  border-radius: 50%;
+  box-shadow: 0 0 2em #000a;
+  background-size: cover  
+}
+
+$duration: 24s;
+
+.ring {
+  position: absolute;
+  
+  i {
+    position: absolute;
+    border: 1px solid hsl(var(--hue) 100% 75%);
+    box-shadow:
+      0 0 1em hsl(var(--hue) 100% 75%) inset,
+      0 0 1em hsl(var(--hue) 100% 75%);
+    border-radius: 50%;
+    animation:
+      iMove $duration var(--delay) infinite both linear,
+      iScale $duration var(--delay) infinite both cubic-bezier(.3642,0,.6358,1);
+        
+    @for $i from 0 to 32 {
+      &:nth-child(#{$i + 1}) {
+        --delay: #{$duration / -32 * $i};
+        --hue: #{$i * 98};
+        --rx: #{random(360)}deg;
+        --ry: #{random(360)}deg;
+        --rz: #{random(360)}deg;
+      }
+    }
+  }
+}
+
+@keyframes iMove {
+  0% { transform: rotateZ(var(--rz)) rotateY(var(--ry)) rotateX(var(--rx)) translateZ(50em); }
+  100% { transform: rotateZ(var(--rz)) rotateY(var(--ry)) rotateX(var(--rx)) translateZ(-50em); }
+}
+
+@keyframes iScale {
+  0%, 100% { inset: -1em; opacity: 0; }
+  35%, 65% { inset: -1em; opacity: 1; }
+  50% { inset: -10em; opacity: 1; }
+}
+
+
