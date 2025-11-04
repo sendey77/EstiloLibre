@@ -1,0 +1,96 @@
+﻿<style type="text/css">
+/* BOTON NEON PULSO */
+<div style="margin-left: 240px;">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <br />
+<br />
+<br />
+<br />
+<br />
+</meta>
+</meta>
+</div>
+<div style="margin-left: 240px;">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Botón Neón Pulse</title>
+<style type="text/css">
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grad;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a0a;
+  font-family: "Inter", sans-serif;
+  perspective: 1000px;
+  overflow-x: hidden;
+}
+
+.btn {
+  position: relative;
+  padding: 1.5rem 3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  background: #000;
+  border: 2px solid #0ff;
+  border-radius: 10px;
+  cursor: pointer;
+  min-width: 200px;
+  z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 15px #0ff, 0 0 30px rgba(0,255,255,0.2);
+}
+
+/* Luz permanente */
+.btn::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  border: 2px solid #0ff;
+  border-radius: 12px;
+  filter: blur(10px);
+  z-index: -2; /* atrás de todo */
+}
+
+/* Pulso animado */
+.btn::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  border: 2px solid #0ff;
+  border-radius: 12px;
+  animation: pulseOut 2s ease-out infinite;
+  opacity: 1;
+  z-index: -1; /* delante del blur pero detrás del botón */
+}
+
+@keyframes pulseOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Zoom y resplandor al pasar el ratón */
+.btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #0ff, 0 0 50px rgba(0,255,255,0.3);
+}
+
+/* Efecto al hacer clic */
+.btn:active {
+  color: #000;
+  background: #0ff1;
+}
