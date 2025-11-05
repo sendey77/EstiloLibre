@@ -1,0 +1,53 @@
+/* ================================
+   GALERÍA DE IMÁGENES
+   Autor: sendey77
+   ================================ */
+
+/* Contenedor general de la galería */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+  gap: 15px; /* Espacio entre imágenes */
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+  background: none;
+}
+
+/* Cada contenedor de imagen */
+.foto {
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  height: 180px; /* Tamaño uniforme para todas las imágenes */
+  transition: transform 0.3s ease;
+}
+
+/* Las imágenes */
+.foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Mantiene proporción y recorta si es necesario */
+  display: block;
+  transition: transform 0.4s ease, filter 0.3s ease;
+}
+
+/* Efecto hover (zoom suave) */
+.foto:hover img {
+  transform: scale(1.2);
+  filter: brightness(0.9);
+  background-image: url('https://img.webme.com/pic/y/yeshua-viene-ya/stela.gif');
+}
+
+/* Diseño responsive */
+@media (max-width: 900px) {
+  .galeria {
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas en pantallas medianas */
+  }
+}
+
+@media (max-width: 600px) {
+  .galeria {
+    grid-template-columns: 1fr; /* Una columna en móviles */
+  }
+}
