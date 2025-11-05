@@ -1,0 +1,56 @@
+/* ================================
+   GALERÍA DE IMÁGENES
+   Autor: sendey77
+   ================================ */
+
+/* Contenedor general de la galería */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+  gap: 15px; /* Espacio entre imágenes */
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+  background: none;
+}
+
+/* Cada contenedor de imagen */
+.foto {
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  height: 180px; /* Altura uniforme para mantener la cuadrícula */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  background-color: #000; /* Fondo para rellenar espacio si la imagen es más pequeña */
+}
+
+/* Las imágenes */
+.foto img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Muestra la imagen completa sin recortar */
+  display: block;
+  transition: transform 0.4s ease, filter 0.3s ease;
+}
+
+/* Efecto hover (zoom suave) */
+.foto:hover img {
+  transform: scale(1.1); /* ligero aumento al pasar el mouse */
+  filter: brightness(0.9);
+}
+
+/* Diseño responsive */
+@media (max-width: 900px) {
+  .galeria {
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas en pantallas medianas */
+  }
+}
+
+@media (max-width: 600px) {
+  .galeria {
+    grid-template-columns: 1fr; /* Una columna en móviles */
+  }
+}
