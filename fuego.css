@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Efecto de fuego al pasar el cursor</title>
+<style>
+body {
+  margin: 0;
+  display: grad;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #000;
+}
+
+/* Contenedor principal */
+.cover {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Imagen base (fluida) */
+.cover img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  transition: opacity 0.5s ease;
+}
+
+/* Efecto de máscara tipo fuego */
+.fire-mask {
+  position: relative;
+  -webkit-mask: url("https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png");
+  mask: url("https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png");
+  -webkit-mask-size: 7100% 100%;
+  mask-size: 7100% 100%;
+  background: linear-gradient(90deg, #ff9900, #ff0000);
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+}
+
+/* 🔥 La animación solo se activa al hacer hover */
+
+.cover:hover.fire-mask {
+  animation: aniFire 2.8s steps(70) infinite;
+}
+
+/* Animación del fuego (más sutil y lenta) */
+@keyframes aniFire {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+</style>
