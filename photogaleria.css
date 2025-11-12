@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>PHOTO Galería</title>
+<style>
+  body {
+    font-family: sans-serif;
+  }
+
+  /* Contenedor de la galería */
+  .galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+    gap: 10px;
+    justify-items: center;
+    padding: 10px;
+  }
+
+  /* Miniaturas */
+  .lim {
+    width: 165px;
+    height: 127px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+
+  .lim:hover {
+    transform: scale(1.05);
+  }
+</style>
+</head>
+<body>
