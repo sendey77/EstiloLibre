@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>PHOTO Galería con Efecto de Máscara</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background: #fff;
+    margin: 0;
+    padding: 20px;
+  }
+
+  /* Contenedor de la galería */
+  .galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+    gap: 10px;
+    justify-items: center;
+  }
+
+  /* Contenedor de cada imagen */
+  .cover {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: box-shadow 0.4s ease;
+  }
+
+  .cover:hover {
+    box-shadow: 0 0 30px rgba(255, 100, 0, 0.6);
+  }
+
+  /* Imagen base */
+  .cover img {
+    width: 165px;
+    height: 127px;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+    transition: opacity 0.5s ease;
+  }
+
+  /* Efecto de máscara tipo fuego */
+  .fire-mask {
+    -webkit-mask-image: url("https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png");
+    mask-image: url("https://raw.githubusercontent.com/pizza3/asset/master/natureSmaller.png");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 7100% 100%;
+    mask-size: 7100% 100%;
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+    transition: transform 0.3s;
+  }
+
+  /* Animación solo al hacer hover una vez */
+  .cover:hover .fire-mask {
+    animation: aniFire 2.8s steps(70) forwards;
+  }
+
+  @keyframes aniFire {
+    from { -webkit-mask-position: 0 0; mask-position: 0 0; }
+    to { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+  }
+
+</style>
