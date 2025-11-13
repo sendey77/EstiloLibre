@@ -1,0 +1,34 @@
+﻿<style type="text/css">
+    /* 🔹 NO tocamos html ni body (pwg se rompe si se hace) */
+
+    /* Contenedor envolvente que centrará el bloque */
+    .centro-pwg {
+        width: 100%;
+        text-align: center; /* centra todo lo que esté dentro */
+        background: transparent;
+        margin: 0 auto;
+    }
+
+    /* Contenedor principal de la animación */
+    .cover {
+        display: inline-block; /* permite centrarse con text-align */
+        width: 100%;
+        max-width: 500px; /* ajusta según tamaño deseado */
+        aspect-ratio: 16 / 9;
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        background: #000; /* fondo si no carga three.js */
+        vertical-align: middle; /* centra mejor en celdas/tablas */
+    }
+
+    /* El contenedor de Three.js */
+    #three-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
