@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Corridor Animation</title>
+<style>
+  html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
+  }
+  canvas{
+    display:block;
+    width:100%;
+    height:100%;
+  }
+</style>
+</head>
+<body>
+
+<script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
+
+<script>
+let scene, camera, renderer, corridor;
+const colors=[0xff00ff,0x00ffff,0xffff00,0xff0066];
+
+function init(){
+  scene=new THREE.Scene();
+  scene.fog=new THREE.FogExp2(0x000000,0.02);
+
+  camera=new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth/window.innerHeight,
+    0.1,
+    1000
+  );
+
+  renderer=new THREE.WebGLRenderer({antialias:true});
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  corridor=new THREE.Group();
+
+  for(let i=0;i<30;i++){
+    const geometry=new THREE.BoxGeometry(10,10,1);
+
+    const solidMaterial=new THREE.MeshPhongMaterial({
+      color:colors[i%colors.length],
+      transparent:true,
+      opacity:0.3,
+      emissive:colors[i%colors.length],
+      emissiveIntensity:0.3
+    });
+
+    const solidFrame=new THREE.Mesh(geometry,solidMaterial);
+    const edges=new THREE.EdgesGeometry(geometry);
+    const wireMaterial=new THREE.LineBasicMaterial({color:colors[i%colors.length]});
+    const wireFrame=new THREE.LineSegments(edges,wireMaterial);
+
+    const g=new THREE.Group();
+    g.add(solidFrame);
+    g.add(wireFrame);
+
+    const ang=(i/30)*Math.PI*2;
+    g.position.z=-i*2;
+    g.rotation.z=ang;
+    g.position.x=Math.sin(ang)*3;
+    g.position.y=Math.cos(ang)*3;
+
+    corridor.add(g);
+  }
+
+  scene.add(corridor);
+
+  const l1=new THREE.PointLight(0xff00ff,3);
+  const l2=new THREE.PointLight(0x00ffff,3);
+  const l3=new THREE.PointLight(0xffff00,2);
+
+  l1.position.set(10,10,10);
+  l2.position.set(-10,-10,10);
+  l3.position.set(0,0,15);
+
+  scene.add(l1,l2,l3);
+
+  camera.position.z=15;
+
+  animate();
+}
+
+function animate(){
+  requestAnimationFrame(animate);
+  const t=Date.now()*0.001;
+
+  corridor.rotation.z+=0.005;
+  corridor.rotation.x+=0.002;
+
+  corridor.children.forEach((g,i)=>{
+    const a=(i/corridor.children.length)*Math.PI*2 + t*0.5;
+
+    g.rotation.z=a;
+    g.position.x=Math.sin(a)*3;
+    g.position.y=Math.cos(a)*3;
+
+    const hue=(t*0.5+i*0.1)%1;
+    const color=new THREE.Color().setHSL(hue,1,0.5);
+
+    g.children[0].material.color.copy(color);
+    g.children[0].material.emissive.copy(color);
+    g.children[1].material.color.copy(color);
+  });
+
+  camera.position.x=Math.sin(t*0.4)*6;
+  camera.position.y=Math.cos(t*0.3)*6;
+  camera.lookAt(0,0,-10);
+
+  renderer.render(scene,camera);
+}
+
+function resize(){
+  camera.aspect=window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth,window.innerHeight);
+}
+window.addEventListener('resize',resize);
+
+init();
+</script>
+
+</body>
+</html>
